@@ -1,0 +1,15 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: auth-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+jwt:
+  secret: BcXMn2nNsygqYgkl1sqlkckDSlriiskdycGNC2LLkwneoSuhIyxjks7bd1kCiyZblknNxcbcvx0uycgxIo1927E36aBsfkfjb1972yesAJkbcxzpmcb1972eSTlkoqbnEt

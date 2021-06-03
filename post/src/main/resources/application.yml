@@ -1,0 +1,12 @@
+server:
+  port: 8502
+
+spring:
+  data:
+    neo4j:
+      username: neo4j
+      password: password
+      uri: neo4j://localhost:7687
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
