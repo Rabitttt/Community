@@ -1,13 +1,17 @@
 package com.community.user.entity;
 import com.community.user.enums.Gender;
 import lombok.*;
+import org.hibernate.id.UUIDGenerationStrategy;
+import org.neo4j.procedure.Internal;
 import org.springframework.data.neo4j.core.schema.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import java.util.List;
 
 @Node("User")
 @NoArgsConstructor
@@ -16,10 +20,11 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
+@EqualsAndHashCode
 public class UserEntity {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue()
+    private long id;
 
     @Property("userName")
     @Column(unique = true)
@@ -38,9 +43,11 @@ public class UserEntity {
     @Property
     private String profilePictureUrl;
 
+
     @Relationship(type = "FOLLOWED",direction = Relationship.Direction.OUTGOING)
     private List<UserEntity> followed;
 
     @Relationship(type = "FOLLOWER",direction = Relationship.Direction.INCOMING)
     private List<UserEntity> follower;
+
 }

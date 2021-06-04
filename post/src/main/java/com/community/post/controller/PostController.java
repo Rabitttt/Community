@@ -3,6 +3,7 @@ package com.community.post.controller;
 import com.community.post.domain.Post;
 import com.community.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,6 @@ public class PostController {
 
     @PostMapping("/create")
     public void createPost(@RequestBody Post post){
-
-        //postService.createNewPost(post);
-        postService.deneme();
+        postService.createNewPost(post);
     }
 }
