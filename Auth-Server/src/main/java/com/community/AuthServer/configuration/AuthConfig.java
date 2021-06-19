@@ -15,3 +15,4 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 }
+

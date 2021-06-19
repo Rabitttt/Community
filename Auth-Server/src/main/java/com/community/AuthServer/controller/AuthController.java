@@ -16,7 +16,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login(){
-        return "Selam canim ben amcanim";
+        return "Selam";
     }
 
     @PostMapping("/login")

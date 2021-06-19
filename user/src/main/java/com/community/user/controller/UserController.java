@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class UserController {
-
+    
     private final UserService userService;
 
     @PostMapping("/register")
@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/profile")
     public User getUserProfile(){
 
-        User user = userService.getRequestedUser();
+        User user = userService.getUserProfile();
         System.out.println(user);
         return user;
     }

@@ -1,8 +1,6 @@
 package com.community.user.entity;
 import com.community.user.enums.Gender;
 import lombok.*;
-import org.hibernate.id.UUIDGenerationStrategy;
-import org.neo4j.procedure.Internal;
 import org.springframework.data.neo4j.core.schema.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -22,8 +20,8 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class UserEntity {
-    @Id
-    @GeneratedValue()
+
+    @Id @GeneratedValue
     private long id;
 
     @Property("userName")
@@ -44,10 +42,10 @@ public class UserEntity {
     private String profilePictureUrl;
 
 
-    @Relationship(type = "FOLLOWED",direction = Relationship.Direction.OUTGOING)
-    private List<UserEntity> followed;
+   // @Relationship(type = "FOLLOWED",direction = Relationship.Direction.OUTGOING)
+   // private List<UserEntity> followed;
 
-    @Relationship(type = "FOLLOWER",direction = Relationship.Direction.INCOMING)
-    private List<UserEntity> follower;
+    @Relationship(type = "FOLLOWER",direction = Relationship.Direction.OUTGOING)
+    private List<UserEntity> followed;
 
 }
