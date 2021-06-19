@@ -8,13 +8,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 @SpringBootApplication
 public class AuthServerApplication {
 
+	public static void main(String[] args) {
+		SpringApplication.run(AuthServerApplication.class, args);
+	}
+
 	@Bean
 	public WebClient.Builder getWebClientBuilder(){
 		return WebClient.builder();
 	}
 
-	public static void main(String[] args) {
-		SpringApplication.run(AuthServerApplication.class, args);
-	}
 
 }

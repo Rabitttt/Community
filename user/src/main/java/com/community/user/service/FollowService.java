@@ -19,17 +19,19 @@ public class FollowService {
 
     public void followUser(long followRequestedUserId){
 
-        UserEntity userEntityStart = userService.getRequestedUser().toEntity();
+        User user = userService.getRequestedUser();
+        UserEntity userEntityStart = userRepository.findById(user.getId()).orElseThrow();
         UserEntity userEntityEnd = userRepository.findById(followRequestedUserId).orElseThrow();
+        System.out.println(userEntityStart.getFollowed());
+       // List<UserEntity> follower = new ArrayList<>();
+       // List<UserEntity> followed = new ArrayList<>();
+       // follower.add(userEntityStart);
+        //followed.add(userEntityEnd);
+       // userEntityEnd.setFollower(follower);
+        userEntityStart.getFollowed().add(userEntityEnd);
+        UserEntity asd = userRepository.save(userEntityStart);
 
-        List<UserEntity> follower = new ArrayList<>();
-        List<UserEntity> followed = new ArrayList<>();
-        follower.add(userEntityStart);
-        followed.add(userEntityStart);
-        userEntityEnd.setFollower(follower);
-        userEntityEnd.setFollowed(followed);
-        userRepository.save(userEntityEnd);
-
+        System.out.println(asd);
     }
 
 }

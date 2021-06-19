@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
 @RequiredArgsConstructor //makes dependency injection
 public class PostService {
 
-   // @Autowired
-  //  WebClient.Builder webClientBuilder;
+    WebClient.Builder webClientBuilder;
 
     private final PostRepository postRepository;
 
@@ -38,9 +41,30 @@ public class PostService {
         postEntity.setOwnerId(userId);
         addOwner(postEntity); //Make graph db relation (Edge between Post and User Nodes)
     }
+
+    public void likePost(long likedPostId){
+        long requestedUserId = getRequestedUserIdFromHeader();
+
+        PostEntity postEntity = postRepository.findById(likedPostId).orElseThrow();
+        postRepository.likePost(requestedUserId,postEntity.getId());
+    }
+
     private long getRequestedUserIdFromHeader(){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         return Long.parseLong(  attributes.getRequest().getHeader("id") );
     }
 
+    public Post getPostFromId(long id){
+        PostEntity postEntity = postRepository.findById(id).orElseThrow();
+        return Post.fromEntity(postEntity);
+    }
+
+    public List<Post> getSelectedUserPosts(String username){
+        List<PostEntity> postEntities = postRepository.getUserPosts(username);
+        List<Post> posts = new ArrayList<>();
+        postEntities.forEach(postEntity -> {
+            posts.add(Post.fromEntity(postEntity));
+        });
+        return posts;
+    }
 }

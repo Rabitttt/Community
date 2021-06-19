@@ -1,12 +1,9 @@
 package com.community.AuthServer.service;
 
-import com.community.AuthServer.model.AuthResponse;
 import com.community.AuthServer.model.RequestUser;
 import com.community.AuthServer.security.Utility;
 import lombok.RequiredArgsConstructor;
-import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,6 +14,7 @@ public class AuthService {
 
     @Autowired
     WebClient.Builder webClientBuilder;
+
     @Autowired
     PasswordEncoder passwordEncoder;
 

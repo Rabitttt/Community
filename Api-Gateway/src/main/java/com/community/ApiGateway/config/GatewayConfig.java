@@ -26,5 +26,4 @@ public class GatewayConfig {
                         .uri("lb://auth-service"))
                 .build();
     }
-
 }

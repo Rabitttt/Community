@@ -3,6 +3,9 @@ package com.community.user.domain;
 import com.community.user.entity.UserEntity;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -15,6 +18,8 @@ public class User {
     private String password;
     private String description;
     private String profilePictureUrl;
+    private List<User> followed;
+    private List<Post> posts;
 
     public static User fromEntity(UserEntity userEntity){
         return User.builder()
@@ -35,4 +40,13 @@ public class User {
                 .profilePictureUrl(profilePictureUrl)
                 .build();
     }
+
+    public static List<User> followedListFromEntity(UserEntity userEntity){
+        List<User> followedUsers = new ArrayList<>();
+        userEntity.getFollowed().forEach(user -> {
+            followedUsers.add( fromEntity(user) );
+         });
+        return followedUsers;
+    }
+
 }
